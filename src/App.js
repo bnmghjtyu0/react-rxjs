@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { render } from "react-dom";
+import Clock from "./clock";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      intervalTime: 1000
+    };
+  }
+  incrementTime() {
+    this.setState({
+      intervalTime: this.state.intervalTime + 1000
+    });
+  }
+  decrementTime() {
+    this.setState({
+      intervalTime: this.state.intervalTime - 1000
+    });
+  }
+  render() {
+
+    return (
+      <div>
+        <button onClick={this.incrementTime.bind(this)}>Increment Time</button>
+        <button onClick={this.decrementTime.bind(this)}>
+          decrementTime Time
+        </button>
+        {`目前 ${this.state.intervalTime / 1000} 秒`}
+        <Clock intervalTime={this.state.intervalTime} />
+      </div>
+    );
+  }
 }
-
 export default App;
